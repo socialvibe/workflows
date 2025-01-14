@@ -1,0 +1,23 @@
+#
+# pr_jira_title.yml
+#
+
+name: pr-title
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+    - uses: deepakputhraya/action-pr-title@master
+      with:
+        regex: '\b(?:JIRA-|DSOS-|DAT-|GDOPS-)\b'
+        prefix_case_sensitive: false # title prefix are case insensitive
+        min_length: 5 # Min length of the title
+        max_length: 80 # Max length of the title
+        verbal_description: 'The PR title not contain any of the allowed JIRA projects (DSOS, DAT, GDOPS) IDs and number' # Verbal description of the regex rule
+        github_token: ${{ github.token }}
