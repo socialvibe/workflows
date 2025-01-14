@@ -1,8 +1,8 @@
 #
-# pr_jira_title.yml
+# pr_jira_ticket.yml
 #
 
-name: pr-title
+name: pr-jira-ticket
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
