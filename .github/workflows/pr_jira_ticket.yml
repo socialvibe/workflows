@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: deepakputhraya/action-pr-title@master
       with:
-        regex: '\b(?:JIRA-|DSOS-|DAT-|GDOPS-)\b'
+        regex: '^[A-Z]{1,10}-\d{1,10}(:?\s|$)'
         prefix_case_sensitive: false # title prefix are case insensitive
         min_length: 5 # Min length of the title
         max_length: 80 # Max length of the title
-        verbal_description: 'The PR title not contain any of the allowed JIRA projects (DSOS, DAT, GDOPS) IDs and number' # Verbal description of the regex rule
+        verbal_description: 'The PR title must begin with a valid JIRA project ticket ID, followed by a dash and a number. For example, a valid title would be DSOS-1234: Fix a critical issue. Ensure the title includes one of the allowed JIRA project keys (e.g., DSOS, DAT, GDOPS) in the format PROJECT-ID at the beginning.' # Verbal description of the regex rule
         github_token: ${{ github.token }}
