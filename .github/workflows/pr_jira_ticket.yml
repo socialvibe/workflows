@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: deepakputhraya/action-pr-title@master
       with:
-        regex: '^[A-Z]{1,10}-\d{1,10}(:?\s|$)'
+        regex: '^[A-Z]{2,8}-\d{2,8}(:?\s|$)'
         prefix_case_sensitive: false # title prefix are case insensitive
         min_length: 5 # Min length of the title
         max_length: 80 # Max length of the title
