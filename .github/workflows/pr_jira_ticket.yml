@@ -28,4 +28,5 @@ jobs:
           prefix_case_sensitive: false
           min_length: 5
           max_length: 80
+          verbal_description: 'The PR title must begin with a valid JIRA project ticket ID, followed by a dash and a number. For example, a valid title would be FOO-1234: Fix a critical issue. Ensure the title includes one of the allowed JIRA project keys in the format PROJECT-ID at the beginning.'
           github_token: ${{ github.token }}
