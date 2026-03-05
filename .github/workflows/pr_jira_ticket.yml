@@ -5,27 +5,19 @@
 name: pr-jira-ticket
 on:
   pull_request:
-  push:
-    branches:
-      - '**'
+    types: [opened, edited, synchronize, reopened]
+
 jobs:
   check-pr-title:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: read
     steps:
-      - name: Skip PR title check on push
-        if: github.event_name == 'push'
-        run: |
-          echo "Push event detected. Skipping PR title check."
-          exit 0
-
-      - uses: deepakputhraya/action-pr-title@v1.0.2
-        if: github.event_name == 'pull_request'
-        with:
-          regex: '^[A-Z]{2,8}-\d{2,8}(:?\s|$)'
-          prefix_case_sensitive: false
-          min_length: 5
-          max_length: 80
-          verbal_description: 'The PR title must contain a valid JIRA project ticket ID, followed by a dash and a number. For example, a valid title would be PROJECT-1234: Fix a critical issue or fix(PROJECT-123).'
-          github_token: ${{ github.token }}
+    - uses: deepakputhraya/action-pr-title@v1.0.2
+      with:
+        regex: '^[A-Z]{2,8}-\d{2,8}(:?\s|$)'
+        prefix_case_sensitive: false # title prefix are case insensitive
+        min_length: 5 # Min length of the title
+        max_length: 80 # Max length of the title
+        verbal_description: 'The PR title must begin with a valid JIRA project ticket ID, followed by a dash and a number. For example, a valid title would be DSOS-1234: Fix a critical issue. Ensure the title includes one of the allowed JIRA project keys (e.g., DSOS, DAT, GDOPS) in the format PROJECT-ID at the beginning.' # Verbal description of the regex rule
+        github_token: ${{ github.token }}
